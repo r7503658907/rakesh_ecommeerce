@@ -500,7 +500,9 @@ class getProfile(APIView):
 
     def get(self, request, ):
         try:
-            data = list(Profile.objects.filter().values())
+            userData = User.objects.filter(username=request.user).values()[0]["id"]
+            data = list(Profile.objects.filter(user_id=userData ).values())
+            print(data)
             return Response({
                 'status': 200,
                 'data': data
