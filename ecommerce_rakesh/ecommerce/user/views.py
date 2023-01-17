@@ -635,6 +635,8 @@ class getWishlist(APIView):
     def get(self, request, ):
         try:
             data = list(Wishlist.objects.filter().values())
+            for var in data:
+                var["wishlistData"] = ast.literal_eval(var["wishlistData"])
             return Response({
                 'status': 200,
                 'data': data
@@ -687,6 +689,8 @@ class getAddToCart(APIView):
     def get(self, request, ):
         try:
             data = list(AddToCart.objects.filter().values())
+            for var in data:
+                var["AddToCartData"] = ast.literal_eval(var["AddToCartData"])
             return Response({
                 'status': 200,
                 'data': data
