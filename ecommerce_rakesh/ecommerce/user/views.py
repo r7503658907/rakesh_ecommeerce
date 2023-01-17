@@ -612,10 +612,10 @@ class DeleteWishlist(APIView):
 
     def post(self, request):
         data = request.data
-        serializer = StatusDeleteAddToCartSerializer(data=data)
+        serializer = StatusDeleteWishlistIdSerializer(data=data)
         if serializer.is_valid():
-            wishlist = serializer.data['wishlist']
-            Wishlist.objects.filter(wishlist=wishlist).delete()
+            wishlistId = serializer.data['wishlistId']
+            Wishlist.objects.filter(wishlistId=wishlistId).delete()
 
             return Response({
                 'status': 200,
@@ -733,7 +733,7 @@ class DeleteAddToCart(APIView):
 
     def post(self, request):
         data = request.data
-        serializer = StatusdeleteAddToCartSerializer(data=data)
+        serializer = StatusDeleteAddToCartSerializer(data=data)
         if serializer.is_valid():
             AddToCartId = serializer.data['AddToCartId']
             AddToCart.objects.filter(AddToCartId=AddToCartId).delete()

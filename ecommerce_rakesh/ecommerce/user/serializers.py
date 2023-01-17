@@ -81,8 +81,8 @@ class StatusUpadateAddToCartSerializer(serializers.Serializer):
 class StatusDeleteAddToCartSerializer(serializers.Serializer):
     AddToCartId = serializers.IntegerField()
 
-class StatusdeleteAddToCartSerializer(serializers.Serializer):
-    AddToCartId = serializers.IntegerField()
+class StatusDeleteWishlistIdSerializer(serializers.Serializer):
+    wishlistId = serializers.IntegerField()
 
 
 class RatingAndReviewSerializer(serializers.Serializer):
