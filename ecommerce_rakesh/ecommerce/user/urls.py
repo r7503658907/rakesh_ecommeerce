@@ -81,6 +81,8 @@ urlpatterns = [
     path('getViewEvent/', views.getViewEvent.as_view()),
 
 
+    #Category all
+    path('getCategoryAllData/', views.GetCategoryAllData.as_view()),
 
 
 

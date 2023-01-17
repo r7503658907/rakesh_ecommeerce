@@ -1133,3 +1133,34 @@ class getViewEvent(APIView):
                 'message': 'Something went wrong',
                 'errors': str(e)
             })
+
+
+class GetCategoryAllData(APIView):
+    def get(self, request, ):
+        try:
+
+            subCategoryData = list(SubCategory.objects.filter().values())
+            print(subCategoryData)
+
+            result = []
+            for var in subCategoryData:
+                result.append(var["categoryId"])
+                result.append(subCategoryData)
+
+
+
+
+
+
+
+            return Response({
+                'status': 200,
+                'data': result
+            })
+
+        except Exception as e:
+            return Response({
+                'status': 400,
+                'message': 'Something went wrong',
+                'errors': str(e)
+            })
