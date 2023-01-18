@@ -117,3 +117,4 @@ class StatusUpadateBestSeller(serializers.Serializer):
 
 class viewEventSerializer(serializers.Serializer):
     productId = serializers.CharField(max_length=100)
+

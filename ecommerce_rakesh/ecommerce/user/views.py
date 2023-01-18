@@ -1168,3 +1168,5 @@ class GetCategoryAllData(APIView):
                 'message': 'Something went wrong',
                 'errors': str(e)
             })
+
+
