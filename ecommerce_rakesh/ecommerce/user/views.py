@@ -391,7 +391,7 @@ class postSubCategory(APIView):
 class getSubCategory(APIView):
     def get(self, request, categoryId):
         try:
-            data = list(SubCategory.objects.filter(categoryId_id =categoryId).values())
+            data = list(SubCategory.objects.filter(categoryId_id=categoryId).values())
             return Response({
                 'status': 200,
                 'data': data
@@ -477,10 +477,11 @@ class getProduct(APIView):
                 'errors': str(e)
             })
 
+
 class getProductSubCategory(APIView):
     def get(self, request, subCategoryId):
         try:
-            data = list(SubCategory.objects.filter(subCategoryId_id =subCategoryId).values())
+            data = list(SubCategory.objects.filter(subCategoryId_id=subCategoryId).values())
             return Response({
                 'status': 200,
                 'data': data
@@ -501,7 +502,7 @@ class getProfile(APIView):
     def get(self, request, ):
         try:
             userData = User.objects.filter(username=request.user).values()[0]["id"]
-            data = list(Profile.objects.filter(user_id=userData ).values())
+            data = list(Profile.objects.filter(user_id=userData).values())
             print(data)
             return Response({
                 'status': 200,
@@ -685,7 +686,7 @@ class postAddToCart(APIView):
 
 
 class getAddToCart(APIView):
-  
+
     def get(self, request, ):
         try:
             data = list(AddToCart.objects.filter().values())
@@ -791,7 +792,6 @@ class postRatingAndReview(APIView):
 
 class getRatingAndReview(APIView):
 
-
     def get(self, request, ):
         try:
             data = list(RatingAndReview.objects.filter().values())
@@ -848,8 +848,7 @@ class postProductDetail(APIView):
 
 class getProductDetail(APIView):
 
-
-    def get(self, request,productId ):
+    def get(self, request, productId):
         try:
             data = list(ProductDetail.objects.filter(productId=productId).values())
             for var in data:
@@ -890,6 +889,7 @@ class searchfilter(APIView):
 class locationDetail(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+
     def post(self, request, ):
         serializer = LocationDetailSerializer(data=request.data)
         try:
@@ -1085,7 +1085,6 @@ class getBestSeller(APIView):
 
 class postViewEvent(APIView):
 
-
     def post(self, request):
         serializer = viewEventSerializer(data=request.data)
         try:
@@ -1094,7 +1093,6 @@ class postViewEvent(APIView):
                 userData = User.objects.filter(username=request.user).values()[0]["id"]
 
                 Data = Product.objects.filter(productId=productId).values()[0]["productId"]
-
 
                 viewEvevnt.objects.create(
 
@@ -1122,9 +1120,9 @@ class postViewEvent(APIView):
 
 class getViewEvent(APIView):
 
-    def get(self, request,):
+    def get(self, request, ):
         try:
-            data = list(viewEvevnt.objects.filter(username = request.user).values())
+            data = list(viewEvevnt.objects.filter(username=request.user).values())
 
             return Response({
                 'status': 200,
@@ -1151,12 +1149,6 @@ class GetCategoryAllData(APIView):
                 result.append(var["categoryId"])
                 result.append(subCategoryData)
 
-
-
-
-
-
-
             return Response({
                 'status': 200,
                 'data': result
@@ -1170,3 +1162,24 @@ class GetCategoryAllData(APIView):
             })
 
 
+class UpdateAddToCart(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        data = request.data
+        serializer = StatusUpadateAddToCartDataSerializer(data=data)
+        if serializer.is_valid():
+            AddToCartId = serializer.data['AddToCartId']
+            AddToCartData = serializer.data["AddToCartData"]
+            AddToCart.objects.filter(AddToCartId=AddToCartId).update(AddToCartData=AddToCartData)
+
+            return Response({
+                'status': 200,
+                'message': "Status update Add to cart Data"
+            })
+        return Response({
+            'status': 400,
+            'message': 'Something went wrong',
+            'data': serializer.errors
+        })

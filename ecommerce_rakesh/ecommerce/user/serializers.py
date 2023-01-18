@@ -118,3 +118,6 @@ class StatusUpadateBestSeller(serializers.Serializer):
 class viewEventSerializer(serializers.Serializer):
     productId = serializers.CharField(max_length=100)
 
+class StatusUpadateAddToCartDataSerializer(serializers.Serializer):
+    AddToCartId = serializers.IntegerField()
+    AddToCartData=serializers.JSONField()

@@ -84,6 +84,8 @@ urlpatterns = [
     #Category all
     path('getCategoryAllData/', views.GetCategoryAllData.as_view()),
 
+    path('UpdateAddToCart/', views.UpdateAddToCart.as_view()),
+
 
 
 
