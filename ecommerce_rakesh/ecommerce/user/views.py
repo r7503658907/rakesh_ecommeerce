@@ -201,11 +201,9 @@ class updateAddress(APIView):
             if serializer.is_valid():
                 addressType = serializer.data['addressType']
                 address = serializer.data['address']
-                addressId = serializer.data['addressId']
                 data = User.objects.filter(username=request.user).values()[0]["id"]
                 AddressTable.objects.filter(
                     user_id=data,
-                    addressId=addressId,
                 ).update(address=address, addressType=addressType)
 
                 return JsonResponse({
@@ -273,6 +271,8 @@ class getOrderData(APIView):
         try:
             data = OrderTable.objects.filter().values()
             print(data)
+            for var in data:
+                var["orderData"] = ast.literal_eval(var["orderData"])
 
             return Response({
                 'status': 200,

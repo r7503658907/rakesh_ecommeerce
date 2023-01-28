@@ -18,7 +18,6 @@ class DeleteAddressTableSerializer(serializers.Serializer):
     addressId = serializers.IntegerField()
 
 class UpdateAddressTableSerializer(serializers.Serializer):
-    addressId = serializers.IntegerField()
     addressType=serializers.CharField(max_length=100)
     address = serializers.JSONField()
 
